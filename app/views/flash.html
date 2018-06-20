@@ -1,0 +1,25 @@
+{{if .flash.success}}
+<div class="alert alert-success">
+	{{.flash.success}}
+</div>
+{{end}}
+
+{{if or .errors .flash.error}}
+<div class="alert alert-danger">
+	{{if .flash.error}}
+		{{.flash.error}}
+	{{end}}
+	<ul style="margin-top:10px;">
+		{{range .errors}}
+			<li>{{.}}</li>
+		{{end}}
+	</ul>
+</div>
+{{end}}
+
+<form action="/app/hello" method="GET">
+    {{with $field := field "myName" .}}
+        <input type="text" name="{{$field.Name}}" value="{{$field.Flash}}"/><br/>
+    {{end}}
+    <input type="submit" value="Say hello!" />
+</form>
